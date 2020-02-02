@@ -1,0 +1,23 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}{{ performance.title }}{% endblock %}
+
+{% block body %}
+
+    <article class="uk-article">
+
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" data-src="/assets/images/{{ performance.image }}" uk-img>
+            <h1>{{ performance.title }}</h1>
+        </div>
+
+        <p>{{ performance.description | raw }}</p>
+
+    </article>
+
+    <br>
+
+    <a class="uk-button uk-button-primary" href="{{ path('administrator_performances_edit', {'id': performance.id}) }}">edit</a>
+
+    <a class="uk-button uk-button-secondary" style="float: right" href="{{ path('administrator_performances_index') }}">back to list</a>
+
+{% endblock %}

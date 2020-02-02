@@ -1,0 +1,15 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Edit Performances{% endblock %}
+
+{% block body %}
+
+    <h1>Edit performance</h1>
+
+    {{ include('administrator/performances/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% endblock %}
+
+{% block ckeditor %}
+    {% include 'layouts/ckeditor.html.twig' %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}{{ section.title }}{% endblock %}
+
+{% block body %}
+
+    <article class="uk-article">
+
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" data-src="/assets/images/{{ section.image }}" uk-img>
+            <h1>{{ section.title }}</h1>
+        </div>
+
+        <p>{{ section.description | raw }}</p>
+
+    </article>
+
+    <br>
+
+    <a class="uk-button uk-button-secondary" href="{{ path('administrator_sections_index') }}">back to list</a>
+
+    <a class="uk-button uk-button-primary" style="float: right" href="{{ path('administrator_sections_edit', {'id': section.id}) }}">edit</a>
+
+{% endblock %}

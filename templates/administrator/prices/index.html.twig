@@ -1,0 +1,50 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Prices{% endblock %}
+
+{% block body %}
+
+    <h1>Prices</h1>
+
+    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+
+        <thead>
+        <tr>
+            <th>#</th>
+            <th class="uk-table-shrink">Service</th>
+            <th class="uk-table-expand">Week</th>
+            <th class="uk-table-expand">Weekend</th>
+            <th class="uk-width-small">Actions</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {% for price in prices %}
+            <tr>
+                <td>{{ price.id }}</td>
+                <td>{{ price.service }}</td>
+                <td>{{ price.week }}</td>
+                <td>{{ price.weekend }}</td>
+                <td class="crud-actions">
+                    <div>
+                        <a href="{{ path('administrator_prices_edit', {'id': price.id}) }}">
+                            <i class="fas fa-pen"></i>
+                        </a>
+                        {{ include('administrator/prices/_delete_form.html.twig') }}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <a class="uk-button uk-button-primary" href="{{ path('administrator_prices_new') }}">Create new</a>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Create new performance{% endblock %}
+
+{% block body %}
+
+    <h1>Create new performance</h1>
+
+    {{ include('administrator/performances/_form.html.twig') }}
+
+{% endblock %}
+
+{% block ckeditor %}
+    {% include 'layouts/ckeditor.html.twig' %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Edit section{% endblock %}
+
+{% block body %}
+
+    <h1>Edit section</h1>
+
+    {{ include('administrator/sections/_form.html.twig', {'button_label': 'Update'}) }}
+
+{% endblock %}
+
+{% block ckeditor %}
+    {% include 'layouts/ckeditor.html.twig' %}
+{% endblock %}

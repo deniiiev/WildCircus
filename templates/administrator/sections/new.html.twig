@@ -1,0 +1,15 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Create new section{% endblock %}
+
+{% block body %}
+
+    <h1>Create new section</h1>
+
+    {{ include('administrator/sections/_form.html.twig') }}
+
+{% endblock %}
+
+{% block ckeditor %}
+    {% include 'layouts/ckeditor.html.twig' %}
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="/assets/css/styles.css" />
+        <link rel="stylesheet" href="/assets/css/uikit.min.css" />
+        <link rel="stylesheet" href="/assets/fontawesome/all.css">
+        <script src="/assets/js/uikit.min.js"></script>
+        <script src="/assets/js/uikit-icons.min.js"></script>
+    </head>
+    <body>
+
+        {% block header %}
+            {% include 'layouts/header.html.twig' %}
+        {% endblock %}
+
+        <div class="uk-container uk-container-small" style="padding-top: 40px">
+            {% block body %}{% endblock %}
+        </div>
+
+        {% include 'layouts/footer.html.twig' %}
+
+        {% block javascripts %}{% endblock %}
+        <script src="/assets/js/scripts.js"></script>
+
+    </body>
+</html>

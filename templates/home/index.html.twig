@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Wild Circus{% endblock %}
+
+{% block header %}
+
+    <header uk-sticky>
+
+        <nav class="uk-container uk-navbar">
+
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active">
+                        <a href="/">Wild<strong>Circus</strong></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="uk-navbar-right">
+
+                <ul class="uk-navbar-nav uk-visible@s">
+
+                    <li><a class="uk-text-large" href="#Performances">Performances</a></li>
+
+                    {% for section in sections %}
+
+                        <li><a class="uk-text-large" href="#{{ section.title | replace({' ': ''}) }}">{{ section.title }}</a></li>
+
+                    {% endfor %}
+
+                    <li><a class="uk-text-large" href="#Prices">Prices</a></li>
+
+
+                    {% if app.user %}
+
+                        <li class="uk-inline user-nav-item"><a class="uk-text-large" href="#">{{ app.user.username }}</a>
+                            <div uk-dropdown>
+
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <li><a href="{{ path('administrator_performances_index') }}"><i class="fas fa-user-shield"></i> Admin panel</a></li>
+                                    {% endif %}
+
+                                    <li><a href="{{ path('app_cart') }}"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+
+                                </ul>
+                            </div>
+                        </li>
+
+                    {% else %}
+
+                        <li><a class="uk-text-large" href="{{ path('app_login') }}">Login</a></li>
+
+                    {% endif %}
+
+                </ul>
+
+                <a href="#" class="uk-navbar-toggle uk-hidden@s" uk-navbar-toggle-icon uk-toggle="target: #sidenav"></a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+{% endblock %}
+
+{% block body %}
+
+    <section class="performances">
+
+        <a class="anchor" id="Performances"></a>
+        <h1 class="uk-article-title uk-text-center">Performances</h1>
+        <p class="uk-text-center">
+            Pendant le kick-off du nouveau projet on a compris que le client souhaitais une application web similaire à Betaseries, donc on a réalisé le wireframe avec une structure similaire
+        </p>
+
+        <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match" uk-grid>
+
+            {% for performance in performances %}
+
+                <div>
+                    <div class="uk-card uk-card-default">
+
+                        <div class="uk-card-media-top slider-css-img" style="background-image: url('/assets/images/{{ performance.image }}')">
+                        </div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">{{ performance.title }}</h3>
+                            <p>{{ performance.description | raw }}</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+    {% for section in sections %}
+
+        <section class="{{ section.title | lower | replace({' ': '-' }) }}">
+
+            <a class="anchor" id="{{ section.title | replace({' ': ''}) }}"></a>
+            <h1 class="uk-article-title uk-text-center">{{ section.title }}</h1>
+
+            <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" data-src="/assets/images/{{ section.image }}" uk-img>
+            </div>
+            <p class="uk-text-center">{{ section.description | raw }}</p>
+
+        </section>
+
+    {% endfor %}
+
+    <section class="prices">
+
+        <a class="anchor" id="Prices"></a>
+        <h1 class="uk-article-title uk-text-center">Prices</h1>
+
+        <table class="uk-table uk-table-justify uk-table-divider">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Weeks</th>
+                <th>Weekends</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for price in prices %}
+                    <tr>
+                        <td>{{ price.service }}</td>
+                        <td>{{ price.week }}$</td>
+                        <td>{{ price.weekend }}$</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="uk-container">
+            <button class="uk-align-center uk-button uk-button-primary" type="button" uk-toggle="target: #modal-example">Buy now</button>
+        </div>
+
+        <div id="modal-example" uk-modal>
+
+            <div class="uk-modal-dialog uk-modal-body home-buy-form">
+
+                {% if app.user %}
+
+                    <h2 class="uk-modal-title">Buy tickets</h2>
+
+                    {{ form_start(form) }}
+
+                        <fieldset class="uk-fieldset">
+
+                            {{ form_widget(form) }}
+
+                        </fieldset>
+
+                        <button class="uk-button uk-button-primary uk-align-center">{{ button_label|default('Buy') }}</button>
+
+                    {{ form_end(form) }}
+
+                {% else %}
+
+                    <p class="uk-text-center">You have to be <a href="{{ path('app_login') }}">logged</a> to buy tickets.</p>
+
+                {% endif %}
+
+                <p class="uk-text-center">
+                    <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+
+    <fieldset class="uk-fieldset">
+
+        <div class="uk-margin">
+            {{ form_widget(form.service) }}
+        </div>
+
+        <div class="uk-margin">
+            {{ form_widget(form.week) }}
+        </div>
+
+        <div class="uk-margin">
+            {{ form_widget(form.weekend) }}
+        </div>
+
+    </fieldset>
+
+    <button class="uk-button uk-button-primary">{{ button_label|default('Save') }}</button>
+    <a class="uk-button uk-button-secondary" href="{{ path('administrator_prices_index') }}">Cancel</a>
+
+{{ form_end(form) }}

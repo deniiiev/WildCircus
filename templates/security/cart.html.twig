@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ app.user.username | capitalize }}'s cart{% endblock %}
+
+{% block body %}
+
+    <h2 class="uk-text-center">{{ app.user.username | capitalize }}'s cart</h2>
+
+    {% if tickets %}
+
+        {% if cartStatus %}
+
+        <h3 class="uk-text-center">In cart</h3>
+
+        <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+            <thead>
+            <tr>
+                <th>Service</th>
+                <th>Days</th>
+                <th>Quantity</th>
+                <th>Price (x1)</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ticket in tickets %}
+
+                {% if ticket.status == 0 %}
+
+                    <tr>
+                        <td>{{ ticket.price.service }}</td>
+                        <td>{{ ticket.days ? 'Weekends' : 'Weeks' }}</td>
+                        <td>{{ ticket.count }}</td>
+
+                        {% if ticket.days == 0 %}
+                            <td>{{ ticket.price.week }}$</td>
+                        {% else %}
+                            <td>{{ ticket.price.weekend }}$</td>
+                        {% endif %}
+                    </tr>
+
+                {% endif %}
+
+            {% endfor %}
+
+            <tr>
+                <td colspan="2"></td>
+                <td><strong>TOTAL:</strong></td>
+                <td>
+                    <strong>{{ totalCart }}$</strong>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="3"></td>
+                <td><a href="{{ path('pay') }}" class="uk-button uk-button-primary">Pay now</a></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        {% endif %}
+
+        {% if purchasedStatus %}
+
+        <h3 class="uk-text-center">Purchased</h3>
+
+        <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+            <thead>
+            <tr>
+                <th>Service</th>
+                <th>Days</th>
+                <th>Quantity</th>
+                <th>Price (x1)</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ticket in tickets %}
+
+                {% if ticket.status == 1 %}
+
+                    <tr>
+                        <td>{{ ticket.price.service }}</td>
+                        <td>{{ ticket.days ? 'Weekends' : 'Weeks' }}</td>
+                        <td>{{ ticket.count }}</td>
+
+                        {% if ticket.days == 0 %}
+                            <td>{{ ticket.price.week }}$</td>
+                        {% else %}
+                            <td>{{ ticket.price.weekend }}$</td>
+                        {% endif %}
+                    </tr>
+
+                {% endif %}
+
+            {% endfor %}
+
+            <tr>
+                <td colspan="2"></td>
+                <td><strong>TOTAL:</strong></td>
+                <td>
+                    <strong>{{ totalPurchased }}$</strong>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        {% endif %}
+
+    {% else %}
+
+        <p class="uk-text-center">Your cart is empty.</p>
+
+    {% endif %}
+
+{% endblock %}

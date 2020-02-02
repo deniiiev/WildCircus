@@ -1,0 +1,105 @@
+select, select:hover, select:active, select:focus, a, a:hover, a:active, a:focus{
+    outline: none !important;
+}
+input::-moz-focus-inner {
+    border: none !important;
+    outline: none !important;
+}
+.uk-sticky.uk-sticky-fixed {
+    border-bottom: 1px solid #dbdbdb;
+    background: #fff;
+}
+.footer-container {
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+}
+.footer-container p {
+    margin: 0;
+}
+.uk-table, .uk-table th {
+    text-align: center !important;
+}
+.crud-img div {
+    width: 100px;
+    height: 100px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 6px;
+}
+.crud-img {
+    display: flex;
+    justify-content: center;
+}
+a.anchor {
+    top: -100px;
+    position: relative;
+    display: block;
+    visibility: hidden;
+}
+.md-crud-a {
+    padding-right: 5px;
+    text-decoration: unset !important;
+}
+.md-crud-del .btn {
+    color: #F0908E;
+    transition: unset !important;
+    font-size: 16px;
+    position: relative;
+}
+.md-crud-del .btn:hover {
+    color: #ed5551;
+}
+.crud-actions a {
+    float: left;
+}
+.crud-actions div {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left: 5px;
+}
+button {
+    background: unset;
+    border: unset;
+    cursor: pointer;
+}
+.slider-css-img {
+    height: 300px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.admin-header {
+    background: #222 !important;
+}
+.admin-header .uk-navbar-left a {
+    color: #109de1 !important;
+}
+.admin-header .uk-navbar-left a:hover {
+    color: #1079b2 !important;
+}
+.admin-container {
+    margin-bottom: 40px;
+}
+.uk-dropdown-nav li a i {
+    width: 25px;
+    text-align: center;
+}
+.uk-text-truncate p {
+    display: none;
+}
+.uk-text-truncate p:first-child {
+    display: unset;
+}
+.home-buy-form .uk-fieldset #tickets div {
+    margin-bottom: 12px;
+}
+.home-buy-form .uk-fieldset #tickets div:last-of-type {
+    margin: unset;
+}
+.home-buy-form .uk-fieldset #tickets div input, .home-buy-form .uk-fieldset #tickets div select {
+    margin-top: 6px;
+}

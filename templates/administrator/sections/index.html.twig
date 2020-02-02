@@ -1,0 +1,53 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Sections{% endblock %}
+
+{% block body %}
+
+    <h1>Sections</h1>
+
+    <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for section in sections %}
+
+            <tr>
+                <td>{{ section.id }}</td>
+                <td><a href="{{ path('administrator_sections_show', {'id': section.id}) }}">{{ section.title }}</a></td>
+                <td class="uk-text-truncate">{{ section.description | raw }}</td>
+                <td class="crud-img">
+                    <div style="background-image: url('/assets/images/{{ section.image }}')"></div>
+                </td>
+                <td class="crud-actions">
+                    <div>
+                        <a href="{{ path('administrator_sections_edit', {'id': section.id}) }}">
+                            <i class="fas fa-pen"></i>
+                        </a>
+                        {{ include('administrator/sections/_delete_form.html.twig') }}
+                    </div>
+                </td>
+            </tr>
+
+        {% else %}
+
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+    <a class="uk-button uk-button-primary" href="{{ path('administrator_sections_new') }}">Create new</a>
+
+{% endblock %}
