@@ -1,4 +1,4 @@
-# Wild Circus 2.0
+# Wild Circus
 
 This is a little project in Symfony 4.4 to create in 2 days, for pass the last checkpoint in my coding school
 
@@ -7,6 +7,12 @@ This is a little project in Symfony 4.4 to create in 2 days, for pass the last c
 
 <p align="center">
   <img src="https://i.postimg.cc/QN47qCKk/wireframe.png" alt="Wireframe">
+</p>
+
+## CMD
+
+<p align="center">
+  <img src="https://i.postimg.cc/9QYwrYTb/CMD.png" alt="CMD">
 </p>
 
 ## User story
