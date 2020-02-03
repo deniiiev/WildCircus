@@ -38,6 +38,11 @@ class SecurityController extends AbstractController
      * @return Response
      */
     public function profile(TicketsRepository $ticketsRepository, CounterService $counterService): Response {
+
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+
         $totalCart = $counterService->total(['user' => $this->getUser()->getId(), 'status' => 0]);
         $totalPurchased = $counterService->total(['user' => $this->getUser()->getId(), 'status' => 1]);
         $cartStatus = $counterService->status(['user' => $this->getUser()->getId(), 'status' => 0]);

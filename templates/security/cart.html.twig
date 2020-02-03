@@ -4,6 +4,15 @@
 
 {% block body %}
 
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="uk-alert-{{ label }}" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p>{{ message }}</p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <h2 class="uk-text-center">{{ app.user.username | capitalize }}'s cart</h2>
 
     {% if tickets %}
@@ -17,6 +26,7 @@
             <tr>
                 <th>Service</th>
                 <th>Days</th>
+                <th>Status</th>
                 <th>Quantity</th>
                 <th>Price (x1)</th>
             </tr>
@@ -29,6 +39,7 @@
                     <tr>
                         <td>{{ ticket.price.service }}</td>
                         <td>{{ ticket.days ? 'Weekends' : 'Weeks' }}</td>
+                        <td><span class="md-badge md-badge-warning">{{ ticket.status ? 'Paid' : 'In cart' }}</span></td>
                         <td>{{ ticket.count }}</td>
 
                         {% if ticket.days == 0 %}
@@ -43,7 +54,7 @@
             {% endfor %}
 
             <tr>
-                <td colspan="2"></td>
+                <td colspan="3"></td>
                 <td><strong>TOTAL:</strong></td>
                 <td>
                     <strong>{{ totalCart }}$</strong>
@@ -51,7 +62,7 @@
             </tr>
 
             <tr>
-                <td colspan="3"></td>
+                <td colspan="4"></td>
                 <td><a href="{{ path('pay') }}" class="uk-button uk-button-primary">Pay now</a></td>
             </tr>
 
@@ -62,13 +73,14 @@
 
         {% if purchasedStatus %}
 
-        <h3 class="uk-text-center">Purchased</h3>
+        <h3 class="uk-text-center">Paid</h3>
 
         <table class="uk-table uk-table-hover uk-table-middle uk-table-divider">
             <thead>
             <tr>
                 <th>Service</th>
                 <th>Days</th>
+                <th>Status</th>
                 <th>Quantity</th>
                 <th>Price (x1)</th>
             </tr>
@@ -81,6 +93,7 @@
                     <tr>
                         <td>{{ ticket.price.service }}</td>
                         <td>{{ ticket.days ? 'Weekends' : 'Weeks' }}</td>
+                        <td><span class="md-badge md-badge-success">{{ ticket.status ? 'Paid' : 'In cart' }}</span></td>
                         <td>{{ ticket.count }}</td>
 
                         {% if ticket.days == 0 %}
@@ -95,7 +108,7 @@
             {% endfor %}
 
             <tr>
-                <td colspan="2"></td>
+                <td colspan="3"></td>
                 <td><strong>TOTAL:</strong></td>
                 <td>
                     <strong>{{ totalPurchased }}$</strong>

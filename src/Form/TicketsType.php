@@ -33,7 +33,8 @@ class TicketsType extends AbstractType
                     'required' => false,
                     'attr' => [
                         'min' => 0,
-                        'class' => 'uk-input'
+                        'class' => 'uk-input',
+                        'placeholder' => 'Quantity'
                     ]
                 ])
             ;

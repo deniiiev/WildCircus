@@ -9,6 +9,7 @@ use App\Repository\PerformancesRepository;
 use App\Repository\PricesRepository;
 use App\Repository\TicketsRepository;
 use App\Repository\UserRepository;
+use App\Services\CounterService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,6 +25,7 @@ class HomeController extends AbstractController
      * @param SectionsRepository $sections
      * @param UserRepository $userRepository
      * @param TicketsRepository $ticketsRepository
+     * @param CounterService $counterService
      * @return Response
      */
     public function index(
@@ -32,12 +34,19 @@ class HomeController extends AbstractController
         PricesRepository $prices,
         SectionsRepository $sections,
         UserRepository $userRepository,
-        TicketsRepository $ticketsRepository)
+        TicketsRepository $ticketsRepository,
+        CounterService $counterService)
     {
         $form = $this->createForm(TicketsType::class, null,[
             'prices' => $prices->findAll()
         ]);
         $form->handleRequest($request);
+
+        $cart = null;
+
+        if ($this->getUser()) {
+            $cart = $counterService->status(['user' => $this->getUser()->getId(), 'status' => 0]);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -73,6 +82,7 @@ class HomeController extends AbstractController
                 }
 
             }
+            $this->addFlash('success','Your tickets is added to cart successfully.');
             return $this->redirectToRoute('app_cart');
         }
 
@@ -80,7 +90,8 @@ class HomeController extends AbstractController
             'performances' => $performances->findAll(),
             'prices' => $prices->findAll(),
             'sections' => $sections->findAll(),
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'cart' => $cart
         ]);
     }
 
@@ -97,6 +108,7 @@ class HomeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
         }
+        $this->addFlash('success','Your payment has been successfully completed.');
         return $this->redirectToRoute('app_cart');
     }
 }
